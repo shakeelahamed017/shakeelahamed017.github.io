@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shakeel Ahamed — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --border: #e8e6e0;
+    --text: #1a1a18;
+    --muted: #6b6b67;
+    --accent: #1a1a18;
+    --tag-bg: #f0efe9;
+    --tag-text: #4a4a46;
+    --badge-bg: #1a1a18;
+    --badge-text: #ffffff;
+    --nav-bg: rgba(250,250,248,0.92);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2.5rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 13px; color: var(--muted);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Hero */
+  .hero { padding: 5rem 0 4rem; }
+  .hero .eyebrow {
+    font-size: 12px; font-weight: 400; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-size: 42px; font-weight: 300; letter-spacing: -0.03em;
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+  .hero h1 strong { font-weight: 500; }
+  .hero .roles {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+  }
+  .role-pill {
+    font-size: 12px; padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px; color: var(--muted);
+  }
+  .hero .bio {
+    font-size: 15px; color: var(--muted); max-width: 520px;
+    line-height: 1.75; margin-bottom: 2rem; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 18px; border-radius: 6px;
+    font-size: 13px; font-weight: 400; cursor: pointer;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .btn-dark {
+    background: var(--text); color: #fff; border: 1px solid var(--text);
+  }
+  .btn-dark:hover { opacity: 0.82; }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { background: var(--surface); border-color: var(--text); }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  /* Sections */
+  section { padding: 3.5rem 0; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  /* Projects */
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: var(--surface);
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .project-card:hover { border-color: var(--text); }
+  .project-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .project-title {
+    font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+  }
+  .badge {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+    background: var(--badge-bg); color: var(--badge-text);
+  }
+  .project-desc {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.7; margin-bottom: 1rem; font-weight: 300;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 4px;
+    background: var(--tag-bg); color: var(--tag-text);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem;
+  }
+  .skill-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .skill-item {
+    display: block; font-size: 13px;
+    color: var(--text); padding: 2px 0;
+    font-weight: 300;
+  }
+
+  /* Experience */
+  .exp-item { margin-bottom: 2.5rem; }
+  .exp-item:last-child { margin-bottom: 0; }
+  .exp-row {
+    display: flex; align-items: baseline;
+    justify-content: space-between; margin-bottom: 4px;
+  }
+  .exp-title { font-size: 15px; font-weight: 500; }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--muted);
+  }
+  .exp-company {
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 0.75rem; font-weight: 300;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 13px; color: var(--muted);
+    padding: 3px 0; padding-left: 1rem;
+    position: relative; font-weight: 300; line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--border);
+  }
+
+  /* Certifications */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .cert-card {
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.1rem;
+    background: var(--surface);
+    transition: border-color 0.15s;
+  }
+  .cert-card:hover { border-color: var(--text); }
+  .cert-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .cert-name { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+  .cert-issuer { font-size: 12px; color: var(--muted); font-weight: 300; }
+  .cert-date { font-size: 11px; color: var(--muted); margin-top: 6px; font-family: 'DM Mono', monospace; }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; margin-bottom: 1.5rem;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; color: var(--muted);
+    background: var(--surface);
+    transition: border-color 0.15s; cursor: pointer;
+    text-decoration: none;
+  }
+  .contact-item:hover { border-color: var(--text); color: var(--text); }
+  .contact-icon { font-size: 16px; }
+  .contact-note {
+    font-size: 12px; color: var(--muted);
+    font-weight: 300; line-height: 1.6;
+  }
+
+  footer {
+    padding: 2rem 0; text-align: center;
+    font-size: 12px; color: var(--muted); font-weight: 300;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 1rem; }
+    .container { padding: 0 1.25rem; }
+    .hero h1 { font-size: 30px; }
+    .exp-row { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Shakeel Ahamed .</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero / About -->
+  <section class="hero" id="about">
+    <p class="eyebrow">Portfolio — 2025</p>
+    <h1>Hi, I'm <strong>Shakeel Ahamed</strong> —<br>I build intelligent systems.</h1>
+    <div class="roles">
+      <span class="role-pill">NLP / AI</span>
+      <span class="role-pill">Cybersecurity</span>
+      <span class="role-pill">Low-Code Dev</span>
+      <span class="role-pill">MCA Graduate</span>
+    </div>
+    <p class="bio">
+      Fresher with a passion for building things that matter. My work spans NLP-powered threat detection, enterprise low-code applications, and ML pipelines. Currently open to entry-level roles in Chennai and Bengaluru.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-dark" download>↓ Download resume</a>
+      <a href="#projects" class="btn btn-outline">View projects →</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Projects -->
+  <section id="projects">
+    <p class="section-label">// Projects</p>
+
+    <div class="project-card">
+      <div class="project-header">
+        <p class="project-title">CrystallineAttachment</p>
+        <a href="https://github.com/shakeelahamed017/CrystallineAttachment" target="_blank" class="badge" style="text-decoration:none;">Featured ↗</a>
+      </div>
+      <p class="project-desc">
+        A hybrid cybersecurity system combining a fine-tuned RoBERTa NLP model with static image rendering to detect and mitigate malicious email attachments. Analyzes both content semantics and visual behavior — catching threats that evade traditional signature-based filters.
+      </p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">RoBERTa</span>
+        <span class="tag">HuggingFace</span>
+        <span class="tag">Flask</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Cybersecurity</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <p class="project-title">Bug Tracker — OutSystems</p>
+      </div>
+      <p class="project-desc">
+        Full-stack bug tracking web application built on the OutSystems low-code platform. Supports issue creation, team assignment, priority management, and status workflow tracking for software teams.
+      </p>
+      <div class="tags">
+        <span class="tag">OutSystems</span>
+        <span class="tag">Low-Code</span>
+        <span class="tag">Full-Stack</span>
+        <span class="tag">Workflow</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <p class="project-title">Products REST API — OutSystems</p>
+      </div>
+      <p class="project-desc">
+        Designed and integrated a RESTful API for a Products module with full CRUD support. Included mobile app development and QA testing of a PVR Module — from endpoint design through validation.
+      </p>
+      <div class="tags">
+        <span class="tag">OutSystems</span>
+        <span class="tag">REST API</span>
+        <span class="tag">Mobile Dev</span>
+        <span class="tag">QA Testing</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <p class="project-title">Maintenance Request Form</p>
+      </div>
+      <p class="project-desc">
+        Enterprise-grade form application built in OutSystems for logging and managing facility maintenance requests. Streamlines request tracking from submission to resolution.
+      </p>
+      <div class="tags">
+        <span class="tag">OutSystems</span>
+        <span class="tag">Enterprise App</span>
+        <span class="tag">Low-Code</span>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="divider">
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="section-label">// Skills</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-label">ML / NLP</p>
+        <span class="skill-item">Python</span>
+        <span class="skill-item">Scikit-learn</span>
+        <span class="skill-item">HuggingFace</span>
+        <span class="skill-item">PyTorch</span>
+        <span class="skill-item">NumPy</span>
+        <span class="skill-item">Pandas</span>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">Backend</p>
+        <span class="skill-item">Flask</span>
+        <span class="skill-item">FastAPI</span>
+        <span class="skill-item">REST APIs</span>
+        <span class="skill-item">SQL</span>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">Low-Code</p>
+        <span class="skill-item">OutSystems</span>
+        <span class="skill-item">Mobile Dev</span>
+        <span class="skill-item">Full-Stack Apps</span>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">Security & Other</p>
+        <span class="skill-item">Cybersecurity</span>
+        <span class="skill-item">ITIL V3</span>
+        <span class="skill-item">Threat Detection</span>
+        <span class="skill-item">Git</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Experience -->
+  <section id="experience">
+    <p class="section-label">// Experience</p>
+
+    <div class="exp-item">
+      <div class="exp-row">
+        <p class="exp-title">OutSystems Developer Intern</p>
+        <span class="exp-date">6 months</span>
+      </div>
+      <p class="exp-company">Enhanced Software Solutions Pvt Ltd &nbsp;·&nbsp; Low-Code / Full-Stack Development</p>
+      <ul class="exp-bullets">
+        <li>Built full-stack enterprise apps on OutSystems — Bug Tracker and Maintenance Request Form</li>
+        <li>Designed and integrated a Products REST API module with CRUD operations</li>
+        <li>Developed mobile applications and conducted QA testing on a PVR Module</li>
+        <li>Completed ITIL V3 Foundation certification during internship tenure</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-row">
+        <p class="exp-title">Master of Computer Applications (MCA)</p>
+      </div>
+      <p class="exp-company">B.S. Abdur Rahman Crescent Institute of Science and Technology</p>
+      <ul class="exp-bullets">
+        <li>Specialized in NLP, machine learning, and cybersecurity systems</li>
+        <li>Final project: CrystallineAttachment — hybrid email threat detection system using RoBERTa and static rendering</li>
+        <li>Certified: ITIL V3 Foundation</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-row">
+        <p class="exp-title">B.Sc. Information Technology</p>
+      </div>
+      <p class="exp-company">Bharathidasan University</p>
+      <ul class="exp-bullets">
+        <li>Foundation in programming, databases, networking, and software development</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Certifications -->
+  <section id="certifications">
+    <p class="section-label">// Certifications & Achievements</p>
+    <div class="cert-grid">
+
+      <div class="cert-card">
+        <p class="cert-type">🏆 Conference Paper</p>
+        <p class="cert-name">ICA6NT 2025 — International Conference on AI & 6G</p>
+        <p class="cert-issuer">Velammal Institute of Technology, Chennai</p>
+        <p class="cert-date">Mar 2025 — Paper: CrystallineAttachment</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">🎓 Udemy</p>
+        <p class="cert-name">Generative AI Masters 2025 — NLP, Transformers & Gen AI</p>
+        <p class="cert-issuer">Udemy · Satyajit Pattnaik</p>
+        <p class="cert-date">Mar 2025 · 34.5 hours</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">🎓 Udemy</p>
+        <p class="cert-name">Deep Learning A-Z 2025: Neural Networks, AI & ChatGPT</p>
+        <p class="cert-issuer">Udemy · SuperDataScience Team</p>
+        <p class="cert-date">Mar 2025 · 22.5 hours</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">📜 DevTown</p>
+        <p class="cert-name">Data Science — Project Completion</p>
+        <p class="cert-issuer">DevTown · Self Paced Program</p>
+        <p class="cert-date">Nov 2024</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">📜 DevTown</p>
+        <p class="cert-name">Data Science — Training Completion</p>
+        <p class="cert-issuer">DevTown</p>
+        <p class="cert-date">Nov 2024</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">📜 DevTown × Microsoft Learn</p>
+        <p class="cert-name">Basics of Web Development Bootcamp</p>
+        <p class="cert-issuer">DevTown · GDG Ranchi · Microsoft Learn</p>
+        <p class="cert-date">2024</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">🔐 Great Learning</p>
+        <p class="cert-name">Introduction to Cyber Security</p>
+        <p class="cert-issuer">Great Learning Academy</p>
+        <p class="cert-date">Feb 2024</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">☕ IIT Bombay</p>
+        <p class="cert-name">Java Business Application Training</p>
+        <p class="cert-issuer">Spoken Tutorial Project, IIT Bombay</p>
+        <p class="cert-date">Apr 2024 · Score: 90%</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">💼 Enhanced Software Solutions</p>
+        <p class="cert-name">OutSystems Developer — IT Internship</p>
+        <p class="cert-issuer">Enhanced Software Solutions Pvt. Ltd., Thane</p>
+        <p class="cert-date">Oct 2025 – Mar 2026</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">🌐 iLife Technologies</p>
+        <p class="cert-name">Full Stack Development Internship</p>
+        <p class="cert-issuer">iLife Technologies, Trichy</p>
+        <p class="cert-date">Apr 2022</p>
+      </div>
+
+      <div class="cert-card">
+        <p class="cert-type">⭐ DevTown × Microsoft Learn</p>
+        <p class="cert-name">Certificate of Appreciation — Community Support</p>
+        <p class="cert-issuer">DevTown · Microsoft Student Ambassador</p>
+        <p class="cert-date">2024</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Contact -->
+  <section id="contact">
+    <p class="section-label">// Contact</p>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:1.5rem; font-weight:300;">
+      Open to entry-level roles in Chennai &amp; Bengaluru — NLP/AI, cybersecurity, or low-code development.
+    </p>
+    <div class="contact-grid">
+      <a href="mailto:shakeelahamed7824@gmail.com" class="contact-item">
+        <span class="contact-icon">✉</span> shakeelahamed7824@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/shakeel-ahamed-161354234" class="contact-item" target="_blank">
+        <span class="contact-icon">in</span> LinkedIn — Shakeel Ahamed
+      </a>
+      <a href="https://wa.me/918098597824" class="contact-item" target="_blank">
+        <span class="contact-icon">💬</span> WhatsApp (IND) — +91 80985 97824
+      </a>
+      <a href="https://wa.me/971569687030" class="contact-item" target="_blank">
+        <span class="contact-icon">💬</span> WhatsApp (UAE) — +971 56 968 7030
+      </a>
+      <a href="https://github.com/shakeelahamed017" class="contact-item" target="_blank">
+        <span class="contact-icon">⌥</span> GitHub — shakeelahamed017
+      </a>
+    </div>
+    <p class="contact-note">Open to opportunities — feel free to reach out!</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    Built by Shakeel Ahamed &nbsp;·&nbsp; 2025
+  </div>
+</footer>
+
+</body>
+</html>
